@@ -6,18 +6,24 @@ body, html {
 #root {
     width: 100%;
     height: 100%;
+} 
+.first-page {
+    width: 100%;
+    height: 100%;
 }
 #root>div {
     width: 100%;
     height: 100%;
 }
-.login-user {
+
+/* 登录页 */
+.login-user, .regist-user {
     width: 100%;
     height: 100%;
     background: url('../../res/login/pic_login.png') no-repeat;
     background-size: cover;
 }
-.login-header {    
+.login-header, .regist-header {    
     width: 100%;
     height: 80px;
     line-height: 80px;
@@ -46,7 +52,7 @@ body, html {
     width: 100%;
     height: 67px;
 }
-.login-user .user-mt-title {
+.user-mt-title {
     height: 63px;
     margin: 21px 0 0 328px;
     font-size: 34px;
@@ -93,4 +99,39 @@ body, html {
 }
 .login-user .login-form-button {
     width: 100%;
+}
+
+
+/* 注册页 */
+.regist-header img {
+    height: 42px;
+    margin-left: 40px;
+    z-index: 200;
+}
+.regist-user .regist-content {
+    width: 100%;
+}
+.regist-user .regist-content-main {
+    width:780px;
+    height:600px;
+    margin: 7% auto 0;
+    background: #fff;
+    border-radius: 10px;
+    background: url("../../res/login/bg_login.png") no-repeat;
+    background-size: 100% 600px;
+}
+.regist-user .content-main-userregist {
+    width: 338px;
+    height: auto;
+    margin: 20px 0 20px 191px;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 20px 0 0 0;
+}
+.regist-user .regist-form-button {
+    width: 100%;
+}
+.regist-user .login-gologin {
+    display: inline-block;
+    margin: 20px 0 0 100px;
 }
