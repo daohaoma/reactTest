@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Button, Input, Layout, Icon, Form, Switch } from 'antd'
+// import ReactDOM from 'react-dom'
+import { Button, Input, Icon, Form, Switch } from 'antd'
 import 'antd/dist/antd.css'  
 import '../index.css'
 
@@ -19,7 +19,7 @@ export default class Forget extends React.Component {
         return (
             <div className='forget-user'>
                 <div className='forget-header'>
-                    <img src={require('../../../res/login/logo.png')}/>
+                    <img src={require('../../../res/login/logo.png')} alt='巧房科技'/>
                 </div>
                 <div className='forget-content'>
                     <div className="forget-content-main">

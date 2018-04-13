@@ -1,10 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Button, Input, Layout, Icon, Form, Switch } from 'antd'
-import 'antd/dist/antd.css'  
+// import ReactDOM from 'react-dom'
+// import { Button, Input, Layout, Icon, Form, Switch } from 'antd'
+// import 'antd/dist/antd.css'  
 import '../index.css'
 
-const FormItem = Form.Item
+// const FormItem = Form.Item
 export default class QrCode extends React.Component {
     goPwsLogin = () => {
         window.location.href='../login'
@@ -13,7 +13,7 @@ export default class QrCode extends React.Component {
         return (
             <div className='code-user'>
                 <div className='code-header'>
-                    <img src={require('../../../res/login/logo.png')}/>
+                    <img src={require('../../../res/login/logo.png')} alt='巧房科技'/>
                 </div>
                 <div className='code-content'>
                     <div className='code-content-main'>
@@ -23,7 +23,7 @@ export default class QrCode extends React.Component {
                         </div>
                         <div className='code-content-usercode'>
                             <div className='usercode-img'>
-                                <img src={require('../../../res/login/qr_code.png')}/>
+                                <img src={require('../../../res/login/qr_code.png')} alt='app扫码登录'/>
                             </div>
                             <div className='usercode-app'>
                                 <div><a>请用管家助手APP</a></div>
