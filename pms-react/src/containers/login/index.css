@@ -6,18 +6,24 @@ body, html {
 #root {
     width: 100%;
     height: 100%;
+} 
+.first-page {
+    width: 100%;
+    height: 100%;
 }
 #root>div {
     width: 100%;
     height: 100%;
 }
-.login-user {
+
+/* 登录页 */
+.login-user, .regist-user, .forget-user, .code-user {
     width: 100%;
     height: 100%;
     background: url('../../res/login/pic_login.png') no-repeat;
     background-size: cover;
 }
-.login-header {    
+.login-header, .regist-header, .forget-header, .code-header {    
     width: 100%;
     height: 80px;
     line-height: 80px;
@@ -46,7 +52,7 @@ body, html {
     width: 100%;
     height: 67px;
 }
-.login-user .user-mt-title {
+.user-mt-title {
     height: 63px;
     margin: 21px 0 0 328px;
     font-size: 34px;
@@ -60,6 +66,7 @@ body, html {
     float: right;
     margin-right: 118px;
     margin-top: 6px;
+    cursor: pointer;
 }
 .login-user .content-main-userlogin {
     width:100%;
@@ -86,11 +93,156 @@ body, html {
 }
 .login-user .login-forgot {
     float: right;
+    color: #1890ff;
+    cursor: pointer;
 }
-.login-user .login-goregister {
+.login-goregister, .login-gologin {
     display: inline-block;
     margin: 20px 0 0 100px;
+    color: #1890ff;
+    cursor: pointer;
 }
 .login-user .login-form-button {
     width: 100%;
+}
+
+
+/* 注册页 */
+.regist-header img {
+    height: 42px;
+    margin-left: 40px;
+    z-index: 200;
+}
+.regist-user .regist-content {
+    width: 100%;
+}
+.regist-user .regist-content-main {
+    width:780px;
+    height:600px;
+    margin: 7% auto 0;
+    background: #fff;
+    border-radius: 10px;
+    background: url("../../res/login/bg_login.png") no-repeat;
+    background-size: 100% 600px;
+}
+.regist-user .content-main-userregist {
+    width: 338px;
+    height: auto;
+    margin: 20px 0 20px 191px;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 20px 0 0 0;
+}
+.regist-user .regist-form-button {
+    width: 100%;
+}
+.regist-user .login-gologin {
+    display: inline-block;
+    margin: 20px 0 0 100px;
+}
+
+/* 忘记密码 */
+.forget-header img {
+    height: 42px;
+    margin-left: 40px;
+    z-index: 200;
+}
+.forget-user .forget-content-main {
+    width:780px;
+    height:500px;
+    margin: 7% auto 0;
+    background: #fff;
+    border-radius: 10px;
+    background: url("../../res/login/bg_login.png") no-repeat;
+    background-size: 100% 480px;
+}
+.forget-user .user-mt-title {
+    height: 63px;
+    margin: 21px 0 0 300px;
+    font-size: 34px;
+    line-height: 68px;
+    display: inline-block;
+}
+.forget-user .content-main-userforget {
+    width:100%;
+    height:auto;
+    padding: 20px 0 0 0;
+    margin-left: -30px;
+}
+.forget-user .userforget-input {
+    width: 338px;
+    height: 48px;
+    margin: 20px auto 20px;
+    line-height: 48px;
+    border-radius: 2px;
+    display: block;
+    overflow: hidden;
+}
+.forget-user .userforget-button {
+    width: 338px;
+    height: 48px;
+    margin: 20px auto 20px;
+    line-height: 48px;
+    border-radius: 2px;
+    display: block;
+}
+.forget-user .forget-form-button {
+    width: 100%;
+}
+.forget-user .login-gologin {
+    display: inline-block;
+    margin: 10px 0 0 140px;
+    color: #1890ff;
+    cursor: pointer;
+}
+
+/* 二维码登录 */
+.code-header img {
+    height: 42px;
+    margin-left: 40px;
+}
+.code-user .code-content-main {
+    width:400px;
+    height:480px;
+    margin: 7% auto 0;
+    background: #fff;
+    border-radius: 10px;
+    background-size: 100% 450px;
+}
+.code-user .code-mt-title {
+    height: 60px;
+    margin: 10px 0 0 155px;
+    font-size: 20px;
+    line-height: 68px;
+    display: inline-block;
+    border-bottom: 3px solid #1890ff;
+}
+.code-user .user-mt-img {
+    background: url("../../res/login/login_t_w.png");
+    width: 52px;
+    height: 52px;
+    float: right;
+    cursor: pointer;
+}
+.user-mt-img:hover {
+    opacity: 0.5;
+}
+.code-user .code-content-header {
+    width: 100%;
+    height: 67px;
+}
+.code-user .code-content-usercode {
+    width: 300px;
+    height: 300px;
+    margin: 20px auto 20px;
+}
+.code-content-usercode img {
+    width: 100%;
+    height: 100%;
+}
+.code-user .usercode-app {
+    width: 300px;
+    height: 300px;
+    margin: 20px auto 20px;
+    text-align: center;
 }

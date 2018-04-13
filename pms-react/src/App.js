@@ -1,10 +1,12 @@
 /* Import statements */
-import React, { Component } from 'react'
+import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
 
 /* component */
 import Home from './containers/home'
 import Login from './containers/login'
+import Forget from './containers/login/forgetpws'
+import QrCode from './containers/login/qrCode'
 
 // import Root from './containers/root'
 /* App component */
@@ -18,6 +20,8 @@ export default class App extends React.Component {
           <Switch>
             <Route exact={true} path="/home" component={Home}/>
             <Route exact={true} path="/login" component={Login}/>
+            <Route exact={true} path="/login/forget" component={Forget}/>
+            <Route exact={true} path="/login/qrcode" component={QrCode}/>
             {/* <Route exact={true} path="/" component={Root}/> */}
           </Switch>
       </div>
