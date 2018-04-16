@@ -3,18 +3,27 @@ import React from 'react'
 import { Button, Input, Icon, Form, Switch } from 'antd'
 import 'antd/dist/antd.css'  
 import './index.css'
-// import '../../index'
-// import CreateForm  from '../form'
+import validator from '../../validator'
+import 'whatwg-fetch'
+import 'es6-promise'
 
 const FormItem = Form.Item
-export default class Login extends React.Component { 
+class Login extends React.Component { 
   state={
     showLogin: true,
     showPassword: false,
   }
   componentDidMount() {
-    // const niceForm = createForm((props) => { <div>123</div> })
-    // console.log(CreateForm.form)
+    fetch('https://api.douban.com/v2/movie/top250', {
+      method: 'jsonp',
+      headers: {
+        "Content-Type": "application/json, charset=UTF-8"
+      },
+    }).then((res)=>{
+      console.log(res)
+    }).catch((res)=>{
+        console.log(res.status)
+    })
   }
   showPassword = () => {
     this.setState({ showPassword: !this.state.showPassword })
@@ -31,8 +40,22 @@ export default class Login extends React.Component {
   goCodeLogin = () => {
     window.location.href = './login/qrcode'
   }
+  loginSubmit = () => {
+    this.props.form.validateFields((err, value) => {
+      if (!err) {
+        console.log(value)
+      }
+    })
+  }
+  registSubmit = () => {
+    this.props.form.validateFields((err, value) => {
+      if (!err) {
+        console.log(value)
+      }
+    })
+  }
   render() { 
-    // const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator } = this.props.form
     // console.log(this.props.form)
     return (
       <div className='first-page'>
@@ -49,40 +72,48 @@ export default class Login extends React.Component {
                 </div>
                 <div className="content-main-userlogin">
                   <Form>
-                    <div className="userlogin-input">
                       <FormItem>
-                        {/* {getFieldDecorator('safetyCode')( */}
+                        {getFieldDecorator('safetyCode', {
+                          rules: [{ required: true, message: '请输入安全码' }],
+                        })(
                           <Input
                             placeholder="安全码"
                             prefix={<Icon type="safety" />}
                             size="large"
                           />
-                        {/* )} */}
+                         )}
                       </FormItem>
-                    </div>
-                    <div className="userlogin-input">
                       <FormItem>
-                        <Input
-                          placeholder="用户名"
-                          prefix={<Icon type="user" />}
-                          size="large"
-                        />
+                        {getFieldDecorator('userName', {
+                          rules: [{ required: true, message: '请输入用户名' }],
+                        })(
+                          <Input
+                            placeholder="用户名"
+                            prefix={<Icon type="user" />}
+                            size="large"
+                          />
+                        )}
                       </FormItem>
-                    </div>
-                    <div className="userlogin-input" style={{ marginBottom: 0 }}>
                       <FormItem>
-                        <Input
-                          placeholder="密码"
-                          prefix={<Icon type="lock" />}
-                          size="large"
-                          type="password"
-                        />
+                        {getFieldDecorator('loginPassWord', {
+                          rules: [{
+                            required: true,
+                            pattern: validator.password.pattern,
+                            message: '请输入正确密码'
+                          }],
+                        })(
+                          <Input
+                            placeholder="密码"
+                            prefix={<Icon type="lock" />}
+                            size="large"
+                            type="password"
+                          />
+                        )}
                       </FormItem>
-                    </div>
                     <div className="userlogin-button">
                       <FormItem>
-                        <span className="login-forgot" onClick={this.goForget}>忘记密码</span>
-                        <Button type="primary" htmlType="submit" size="large" className="login-form-button">
+                        <div className="login-forgot" onClick={this.goForget}>忘记密码</div>
+                        <Button type="primary" htmlType="submit" size="large" className="login-form-button" onClick={this.loginSubmit}>
                           登录
                         </Button>
                         <span className="login-goregister" onClick={this.showRegist}>还没账号，去注册 -></span>
@@ -106,47 +137,80 @@ export default class Login extends React.Component {
                 <div className='content-main-userregist'>
                   <Form>
                     <FormItem>
-                      <Input
-                        placeholder="请输入手机号"
-                        prefix={<Icon type="mobile" />}
-                        size="large"
-                      />
-                      <div style={{ height: 10 }}/>
-                      <Input
-                        placeholder="公寓/公司名称"
-                        prefix={<Icon type="home" />}
-                        size="large"
-                      />
-                      <div style={{ height: 10 }}/>
-                      <Input
-                        placeholder="所在城市/区域"
-                        prefix={<Icon type="environment-o" />}
-                        size="large"
-                      />
-                      <div style={{ height: 10 }}/>
-                      <Input
-                        placeholder="联系人"
-                        prefix={<Icon type="user" />}
-                        size="large"
-                      />
-                      <div style={{ height: 10 }}/>
-                      <Input
-                        placeholder="验证码"
-                        prefix={<Icon type="safety" />}
-                        suffix={<a>发送验证码</a>}
-                        size="large"
-                      />
-                      <div style={{ height: 10 }}/>
-                      <Input
-                        placeholder="密码"
-                        prefix={<Icon type="lock" />}
-                        suffix={<Switch onChange={this.showPassword} />}
-                        size="large"
-                        type={this.state.showPassword ? '' : 'password'}
-                      />
+                      {getFieldDecorator('phone', {
+                        rules: [{
+                          required: true,
+                          pattern: validator.phone.pattern,
+                          message: '请输入正确手机号码'
+                        }],
+                      })(
+                        <Input
+                          placeholder="请输入手机号"
+                          prefix={<Icon type="mobile" />}
+                          size="large"
+                        />
+                      )}
                     </FormItem>
                     <FormItem>
-                      <Button type="primary" htmlType="submit" size="large" className="regist-form-button">
+                      {getFieldDecorator('apartment', {
+                        rules: [{ required: true, message: '请输入公寓/公司名称' }],
+                      })(
+                        <Input
+                          placeholder="公寓/公司名称"
+                          prefix={<Icon type="home" />}
+                          size="large"
+                        />
+                      )}
+                    </FormItem>                       
+                    <FormItem>
+                      {getFieldDecorator('area', {
+                        rules: [{ required: true, message: '请输入所在城市/区域' }],
+                      })(
+                        <Input
+                          placeholder="所在城市/区域"
+                          prefix={<Icon type="environment-o" />}
+                          size="large"
+                        />
+                      )}
+                    </FormItem>                       
+                    <FormItem>
+                      {getFieldDecorator('contacts', {
+                        rules: [{ required: true, message: '请输入联系人' }],
+                      })(
+                        <Input
+                          placeholder="联系人"
+                          prefix={<Icon type="user" />}
+                          size="large"
+                        />
+                      )}
+                    </FormItem>                       
+                    <FormItem>
+                      {getFieldDecorator('testCode', {
+                        rules: [{ required: true, message: '请输入验证码' }],
+                      })(
+                        <Input
+                          placeholder="验证码"
+                          prefix={<Icon type="safety" />}
+                          suffix={<a>发送验证码</a>}
+                          size="large"
+                        />
+                      )}
+                    </FormItem>                      
+                    <FormItem>
+                      {getFieldDecorator('registPassWord', {
+                        rules: [{ required: true, message: '请输入密码' }],
+                      })(
+                        <Input
+                          placeholder="密码"
+                          prefix={<Icon type="lock" />}
+                          suffix={<Switch onChange={this.showPassword} />}
+                          size="large"
+                          type={this.state.showPassword ? '' : 'password'}
+                        />
+                      )}
+                    </FormItem>
+                    <FormItem>
+                      <Button type="primary" htmlType="submit" size="large" className="regist-form-button" onClick={this.registSubmit}>
                         注册
                       </Button>
                       <span className="login-gologin" onClick={this.showLogin}>已有账号，去登录 -></span>
@@ -161,5 +225,5 @@ export default class Login extends React.Component {
     )
   } 
 }
-// const FormApp = Form.create()(Login)
-// ReactDOM.render( <FormApp /> , document.getElementById('root'))
+// 获取form
+export default Login = Form.create()(Login)

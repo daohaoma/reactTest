@@ -5,8 +5,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
 // import { Form } from 'antd'
-
 // const FormApp = Form.create()(App)
+
 ReactDOM.render(
     <BrowserRouter>
         <App />

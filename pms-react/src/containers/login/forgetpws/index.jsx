@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import '../index.css'
 
 const FormItem = Form.Item
-export default class Forget extends React.Component {
+class Forget extends React.Component {
     state={
         showPassword: false,
     }
@@ -15,7 +15,15 @@ export default class Forget extends React.Component {
     showPassword = () => {
         this.setState({ showPassword: !this.state.showPassword })
     }
+    onSubmit = () => {
+      this.props.form.validateFields((err, value) => {
+        if (!err) {
+          console.log(value)
+        }
+      })
+    }
     render() {
+        const { getFieldDecorator } = this.props.form
         return (
             <div className='forget-user'>
                 <div className='forget-header'>
@@ -28,29 +36,33 @@ export default class Forget extends React.Component {
                         </div>
                         <div className="content-main-userforget">
                             <Form>
-                                <div className="userforget-input">
-                                    <FormItem>
-                                    {/* {getFieldDecorator('safetyCode')( */}
+                                <FormItem>
+                                    {getFieldDecorator('phoneNum', {
+                                        rules: [{ required: true, message: '请输入手机号' }],
+                                    })(
                                         <Input
                                             placeholder="请输入手机号"
                                             prefix={<Icon type="mobile" />}
                                             size="large"
                                         />
-                                    {/* )} */}
-                                    </FormItem>
-                                </div>
-                                <div className="userforget-input">
-                                    <FormItem>
+                                    )}
+                                </FormItem>
+                                <FormItem>
+                                {getFieldDecorator('testCode', {
+                                    rules: [{ required: true, message: '请输入验证码' }],
+                                })(
                                     <Input
                                         placeholder="验证码"
                                         prefix={<Icon type="safety" />}
                                         size="large"
                                         suffix={<a>发送验证码</a>}
                                     />
-                                    </FormItem>
-                                </div>
-                                <div className="userforget-input">
-                                    <FormItem>
+                                )}
+                                </FormItem>
+                                <FormItem>
+                                {getFieldDecorator('passWord', {
+                                    rules: [{ required: true, message: '请输入密码' }],
+                                })(
                                     <Input
                                         placeholder="密码"
                                         prefix={<Icon type="lock" />}
@@ -58,11 +70,11 @@ export default class Forget extends React.Component {
                                         size="large"
                                         type={this.state.showPassword ? '' : 'password'}
                                     />
-                                    </FormItem>
-                                </div>
+                                )}
+                                </FormItem>
                                 <div className="userforget-button">
                                     <FormItem>
-                                        <Button type="primary" htmlType="submit" size="large" className="forget-form-button">
+                                        <Button type="primary" size="large" className="forget-form-button" onClick={this.onSubmit}>
                                             确定
                                         </Button>
                                         <span className="login-gologin" onClick={this.goLogin}>返回登录 -></span>
@@ -76,3 +88,5 @@ export default class Forget extends React.Component {
         )
     }
 }
+// 获取form
+export default Forget = Form.create()(Forget)
