@@ -1,6 +1,6 @@
 import React from 'react'
-import { Form } from 'antd'
-import Login from '../login'
+// import { Form } from 'antd'
+// import Login from '../login'
 // export const createForm = (statelessFunc) => {
 //   return Form.create()(React.createClass({
 //     render() {
@@ -9,7 +9,12 @@ import Login from '../login'
 //   }))
 // }
 export default class CreateForm extends React.Component {
+  componentDidMount() {
+    console.log(this.props.form)
+  }
   render() {
-    return Form.create()(Login)
+    return (
+      <div>123</div>
+    )
   }
 }
