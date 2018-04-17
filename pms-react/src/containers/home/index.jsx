@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom'
 import { Button, Form } from 'antd'
 import 'antd/dist/antd.css'
   
-export default class Home extends React.Component {
-    componentDidMount() {
-        // console.log('1212121')
-    }
+class Home extends React.Component {
+  componentDidMount() {}
   render() { 
     // console.log(this.props.form)
     return ( 
@@ -14,5 +12,4 @@ export default class Home extends React.Component {
     ) 
   } 
 }
-const LoginForm = Form.create()(Home)
-ReactDOM.render(<LoginForm />, document.getElementById('root'))
+export default Home = Form.create()(Home)
