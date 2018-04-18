@@ -1,0 +1,67 @@
+.logo {
+    height: 32px;
+    margin: 16px;
+    overflow: hidden;
+}
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+  position: relative;
+  top: -27px;
+}
+.home-operation {
+    height: 64px;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    float: right;
+}
+.home-operation .home-add {
+    width: 120px;
+    border-left: 1px solid #F0F0F0;
+}
+.home-operation .home-user {
+    width: 180px;
+    border-left: 1px solid #F0F0F0;
+}
+.home-operation .home-add-menu {
+    width: 120px;
+    height: 100%;
+}
+.home-operation .ant-menu-submenu-title {
+    height: 64px;
+}
+.home-operation .menu-title {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.home-operation .menu-title span {
+    width: 34px;
+    height: 34px;
+    line-height: 30px;
+    margin: 13px auto 13px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 100%;
+    display: block;
+    background: #1890ff;
+    color: #FFFF33;
+}
+.home-operation .user-head {
+    width: 34px;
+    height: 34px;
+    line-height: 30px;
+    margin: 13px 0;
+    text-align: center;
+    border-radius: 100%;
+    display: block;
+}
+.home-operation .user-head img {
+    width: 34px;
+    height: 34px;
+}
