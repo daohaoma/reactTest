@@ -4,8 +4,8 @@ import { Button, Input, Icon, Form, Switch } from 'antd'
 import 'antd/dist/antd.css'  
 import './index.css'
 import validator from '../../validator'
-// import 'whatwg-fetch'
-// import 'es6-promise'
+import 'whatwg-fetch'
+import 'es6-promise'
 import axios from 'axios'
 
 const FormItem = Form.Item
@@ -15,25 +15,42 @@ class Login extends React.Component {
     showPassword: false,
   }
   componentDidMount() {
+    let params = {
+      gcid: "0210032",
+      params:{
+        accountName: "admin",
+        accountPwd: "123456",
+        gcid: "0210032",
+      },
+      token: "",
+      userid: "",
+    }
+    axios.post('http://pms.test.qiaofangyun.com/v2/jjr_user_login/pc_login', params).then((res) => {
+      console.log(res)
+    }).catch((error)=>{
+        console.log(error)
+    })
+
     // const headers = new Headers({
     //   "Content-Type": 'application/json',
     //   "Accept": 'application/json',
-    //   "Origin": '*',
-    //   "Access-Control-Allow-Origin": '*'
+    //   // "Origin": '*',
+    //   // "Access-Control-Allow-Origin": '*'
     // })
-    // fetch('https://api.douban.com/v2/movie/top250', {
-    //   method: 'GET',
+    // fetch('http://pms.test.qiaofangyun.com/v2/jjr_user_login/pc_login', {
+    //   method: 'POST',
     //   mode: 'cors',
     //   headers: headers,
+    //   body: JSON.stringify(params),
     // }).then((res)=>{
     //   console.log(res)
     // }).catch((res)=>{
     //     console.log(res.status)
     // })
 
-    axios.get('/v2/movie/top250').then((res) => {
-      console.log(res)
-    })
+    // axios.get('/v2/movie/top250').then((res) => {
+    //   console.log(res)
+    // })
   }
   showPassword = () => {
     this.setState({ showPassword: !this.state.showPassword })

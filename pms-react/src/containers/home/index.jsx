@@ -16,6 +16,15 @@ class Home extends React.Component {
     })
   }
   componentDidMount() {}
+  selectSub = () => {
+    console.log('1212121')
+  }
+  SubMenuChange = key => {
+    console.log(key)
+  }
+  selectItem = val => {
+    console.log(val)
+  }
   render() { 
     return ( 
       <Layout style={{ minHeight: '100vh' }}>
@@ -28,7 +37,7 @@ class Home extends React.Component {
           <div className="logo">
             <img src={require('../../res/home/logo_pc.png')} alt="巧房科技"/>
           </div>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onOpenChange={this.SubMenuChange} onClick={this.selectItem}>
             <SubMenu
               key='sub1'
               title={<span><Icon type="desktop" /><span>工作台</span></span>}

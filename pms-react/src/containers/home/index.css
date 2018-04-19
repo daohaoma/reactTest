@@ -1,6 +1,7 @@
 .logo {
     height: 32px;
     margin: 16px;
+    padding-left: 10px;
     overflow: hidden;
 }
 .trigger {
