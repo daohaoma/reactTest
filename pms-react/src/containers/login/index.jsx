@@ -1,6 +1,6 @@
 import React from 'react'
 // import ReactDOM from 'react-dom'
-import { Button, Input, Icon, Form, Switch } from 'antd'
+import { Button, Input, Icon, Form, Switch, Modal, Alert } from 'antd'
 import 'antd/dist/antd.css'  
 import './index.css'
 import validator from '../../validator'
@@ -13,47 +13,31 @@ class Login extends React.Component {
   state={
     showLogin: true,
     showPassword: false,
+    showLoginPassword: false,
+    showSuccess: false,
   }
   componentDidMount() {
-    let params = {
-      gcid: "0210032",
-      params:{
-        accountName: "admin",
-        accountPwd: "123456",
-        gcid: "0210032",
-      },
-      token: "",
-      userid: "",
-    }
-    axios.post('http://pms.test.qiaofangyun.com/v2/jjr_user_login/pc_login', params).then((res) => {
-      console.log(res)
-    }).catch((error)=>{
-        console.log(error)
-    })
-
-    // const headers = new Headers({
-    //   "Content-Type": 'application/json',
-    //   "Accept": 'application/json',
-    //   // "Origin": '*',
-    //   // "Access-Control-Allow-Origin": '*'
-    // })
-    // fetch('http://pms.test.qiaofangyun.com/v2/jjr_user_login/pc_login', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: headers,
-    //   body: JSON.stringify(params),
-    // }).then((res)=>{
+    // let params = {
+    //   gcid: "0210032",
+    //   params:{
+    //     accountName: "admin",
+    //     accountPwd: "123456",
+    //     gcid: "0210032",
+    //   },
+    //   token: "",
+    //   userid: "",
+    // }
+    // axios.post('/v2/jjr_user_login/pc_login', params).then((res) => {
     //   console.log(res)
-    // }).catch((res)=>{
-    //     console.log(res.status)
-    // })
-
-    // axios.get('/v2/movie/top250').then((res) => {
-    //   console.log(res)
+    // }).catch((error)=>{
+    //     console.log(error)
     // })
   }
   showPassword = () => {
     this.setState({ showPassword: !this.state.showPassword })
+  }
+  showLoginPassword = () => {
+    this.setState({ showLoginPassword: !this.state.showLoginPassword })
   }
   showLogin = () => {
     this.setState({ showLogin: true })
@@ -67,10 +51,44 @@ class Login extends React.Component {
   goCodeLogin = () => {
     window.location.href = './login/qrcode'
   }
+  error = val => {
+    Modal.error({
+      title: '输入信息有误',
+      content: val,
+    });
+  }
   loginSubmit = () => {
     this.props.form.validateFields((err, value) => {
       if (!err) {
-        console.log(value)
+        // console.log(value)
+        let params = {
+          gcid: value.safetyCode,
+          params:{
+            accountName: value.userName,
+            accountPwd: value.loginPassWord,
+            gcid: value.safetyCode,
+          },
+          token: "",
+          userid: "",
+        }
+        axios.post('/v2/jjr_user_login/pc_login', params).then((res) => {
+          // console.log(res)
+          let data = res.data
+          if(res.status === 200) {
+            if(data.status.code === '200') {
+              this.setState({ showSuccess: true })
+              window.location.href = './home'
+            } else if(data.status.code === '1012') {
+              this.error(data.status.msg)
+            } else if(data.status.code === '1007') {
+              this.error(data.status.msg)
+            }
+          } else {
+            console.log('网络错误!')
+          }
+        }).catch((error)=>{
+          console.log(error)
+        })
       }
     })
   }
@@ -125,15 +143,16 @@ class Login extends React.Component {
                         {getFieldDecorator('loginPassWord', {
                           rules: [{
                             required: true,
-                            pattern: validator.password.pattern,
+                            // pattern: validator.password.pattern,
                             message: '请输入正确密码'
                           }],
                         })(
                           <Input
                             placeholder="密码"
                             prefix={<Icon type="lock" />}
+                            suffix={<Switch onChange={this.showLoginPassword} />}
                             size="large"
-                            type="password"
+                            type={this.state.showLoginPassword ? '' : 'password'}
                           />
                         )}
                       </FormItem>
@@ -150,6 +169,16 @@ class Login extends React.Component {
                 </div>
               </div>
             </div>
+            {this.state.showSuccess ? 
+              <div className='success-alert'>
+                <Alert
+                  message=""
+                  type="success"
+                  description="登陆成功！"
+                  showIcon
+                  style={{ height: 80 }}
+                />
+              </div> : ''}
           </div>
           : 
           <div className='regist-user'>

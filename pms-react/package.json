@@ -19,7 +19,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy":"http://pms.test.qiaofangyun.com",
+  "proxy": {
+    "/v2": {
+      "target": "http://pms.test.qiaofangyun.com"
+    }
+  },
   "devDependencies": {
     "react-router-dom": "^4.2.2"
   }
