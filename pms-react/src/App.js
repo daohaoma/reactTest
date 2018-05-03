@@ -15,7 +15,7 @@ export default class App extends React.Component {
     return (
       <div>
           {/* 链接组件用于链接到其他视图 */}
-          <Link to="/"></Link>
+          {/* <Link to="/"></Link> */}
           {/*如果路径支持符匹配当前URL，则呈现路由组件 */}
           <Switch>
             <Route exact={true} path="/home" component={Home}/>

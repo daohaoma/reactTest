@@ -7,6 +7,7 @@ import validator from '../../validator'
 import 'whatwg-fetch'
 import 'es6-promise'
 import axios from 'axios'
+import Api from '../../api'
 
 const FormItem = Form.Item
 class Login extends React.Component { 
@@ -32,6 +33,7 @@ class Login extends React.Component {
     // }).catch((error)=>{
     //     console.log(error)
     // })
+    console.log(Api.login)
   }
   showPassword = () => {
     this.setState({ showPassword: !this.state.showPassword })
@@ -71,7 +73,7 @@ class Login extends React.Component {
           token: "",
           userid: "",
         }
-        axios.post('/v2/jjr_user_login/pc_login', params).then((res) => {
+        axios.post(Api.login, params).then((res) => {
           // console.log(res)
           let data = res.data
           if(res.status === 200) {
@@ -81,7 +83,9 @@ class Login extends React.Component {
             } else if(data.status.code === '1012') {
               this.error(data.status.msg)
             } else if(data.status.code === '1007') {
-              this.error(data.status.msg)
+              this.error('请检查用户名是否正确！')
+            } else if(data.status.code === '99') {
+              this.error('请检查密码是否正确！')
             }
           } else {
             console.log('网络错误!')

@@ -9,6 +9,7 @@ const SubMenu = Menu.SubMenu
 class Home extends React.Component {
   state = {
     collapsed: false,
+    defaultKey: '1',
   }
   toggle = () => {
     this.setState({
@@ -19,13 +20,43 @@ class Home extends React.Component {
   selectSub = () => {
     console.log('1212121')
   }
-  SubMenuChange = key => {
-    console.log(key)
+  SubMenuChange = keys => {
+    console.log(keys)
+    // console.log(keys[keys.length-1])
+    let key = keys[keys.length-1]
+    // if(key === 'sub1') {
+    //   this.setState({ defaultKey: '1' })
+    // } else if(key === 'sub2') {
+    //   this.setState({ defaultKey: '3' })
+    // } else if(key === 'sub3') {
+    //   this.setState({ defaultKey: '5' })
+    // } else if(key === 'sub4') {
+    //   this.setState({ defaultKey: '8' })
+    // } else if(key === 'sub5') {
+    //   this.setState({ defaultKey: '15' })
+    // } else if(key === 'sub6') {
+    //   this.setState({ defaultKey: '20' })
+    // } else if(key === 'sub7') {
+    //   this.setState({ defaultKey: '26' })
+    // } else if(key === 'sub8') {
+    //   this.setState({ defaultKey: '30' })
+    // } else if(key === 'sub9') {
+    //   this.setState({ defaultKey: '33' })
+    // } else if(key === 'sub10') {
+    //   this.setState({ defaultKey: '40' })
+    // } else if(key === 'sub11') {
+    //   this.setState({ defaultKey: '43' })
+    // } else if(key === 'sub12') {
+    //   this.setState({ defaultKey: '48' })
+    // } else {
+    //   this.setState({ defaultKey: '49' })
+    // }
   }
   selectItem = val => {
     console.log(val)
   }
   render() { 
+    console.log(this.state.defaultKey)
     return ( 
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
